@@ -2,22 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Product } from '../product.model'; 
 import { InventoryService } from '../inventory.service'; 
+import { NgIf } from '@angular/common';
 @Component({
   standalone:true,
   selector: 'app-formulario',
   templateUrl: './formulario.component.html',
   styleUrls: ['./formulario.component.css'],
-  imports: [ReactiveFormsModule]
+  imports: [ReactiveFormsModule, NgIf]
 })
 export class FormularioComponent implements OnInit {
   productForm: FormGroup;
 
   constructor(private fb: FormBuilder, private inventoryService: InventoryService) {
     this.productForm = this.fb.group({
-      productName: ['', Validators.required],
-      quantity: [0, Validators.required],
-      purchasePrice: [0, Validators.required],
-      publicPrice: [0, Validators.required]
+      productName: ['',  [Validators.required, Validators.min(0)]],
+      quantity: [0,  [Validators.required, Validators.min(0)]],
+      purchasePrice: [0,  [Validators.required, Validators.min(0)]],
+      publicPrice: [0,  [Validators.required, Validators.min(0)]]
     });
   }
 
