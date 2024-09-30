@@ -1,0 +1,29 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Purchase Price</th>
+        <th>Public Price</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prod of productos">
+        <td>{{ prod.productName }}</td>
+        <td>{{ prod.quantity }}</td>
+        <td>{{ prod.purchasePrice }}</td>
+        <td>{{ prod.publicPrice }}</td>
+        <td>
+        <button (click)="deleteProduct(prod)" class="btn btn-danger">Delete</button>
+        </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td>Total Inventory Cost: {{ calculateTotalCost() }}</td>
+        <td>Total Sales Price: {{ calculateTotalSalesPrice() }}</td>
+        <td>Total Profit: {{ calculateTotalProfit() }}</td>
+    </tr>
+    </tfoot>
+</table>
