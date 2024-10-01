@@ -1,6 +1,7 @@
-export class Product {
-    productName: string = '';
-    quantity: number = 0;
-    purchasePrice: number = 0;
-    publicPrice: number = 0;
+export interface Product {
+    _id?: string;
+    productName: string;
+    quantity: number;
+    purchasePrice: number;
+    publicPrice: number;
 }

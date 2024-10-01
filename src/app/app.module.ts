@@ -5,17 +5,19 @@ import { AppComponent } from './app.component';
 import { FormularioComponent } from './formulario/formulario.component';
 import { ProducsTableComponent } from './producs-table/producs-table.component';
 import { BodyComponent } from './body/body.component';
-import { InventoryService } from './inventory.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { InventoryService } from './services/inventory.service';
 
 @NgModule({
 declarations: [
 ],
 imports: [
     BrowserModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
 ],
-providers: [],
+providers: [InventoryService],
 bootstrap: []
 })
 export class AppModule { }

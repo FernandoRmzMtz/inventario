@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Product } from '../product.model'; 
-import { InventoryService } from '../inventory.service'; 
+import { InventoryService } from '../services/inventory.service'; 
 import { NgIf } from '@angular/common';
 @Component({
   standalone:true,
@@ -12,6 +12,8 @@ import { NgIf } from '@angular/common';
 })
 export class FormularioComponent implements OnInit {
   productForm: FormGroup;
+  
+  @Output() productAdded = new EventEmitter<void>();
 
   constructor(private fb: FormBuilder, private inventoryService: InventoryService) {
     this.productForm = this.fb.group({
@@ -27,8 +29,11 @@ export class FormularioComponent implements OnInit {
   onSubmit(): void {
     if (this.productForm.valid) {
       const newProduct: Product = this.productForm.value;
-      this.inventoryService.addProduct(newProduct); 
-      this.productForm.reset();
+      this.inventoryService.addProducto(newProduct).subscribe(() => {
+        this.productForm.reset();
+        this.productAdded.emit();
+        // window.location.reload();
+      });
     }
   }
 }
