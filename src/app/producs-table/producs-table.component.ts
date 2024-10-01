@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { InventoryService } from '../inventory.service';
+import { InventoryService } from '../services/inventory.service'; 
 import { Product } from '../product.model';
 import { NgFor, NgIf } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
-  standalone:true,
+  standalone: true,
   selector: 'app-producs-table',
   templateUrl: './producs-table.component.html',
-  styleUrls: ['./producs-table.component.css'],
-  imports: [NgIf,NgFor]
+    imports: [NgIf,NgFor]
 })
 export class ProducsTableComponent implements OnInit {
   productos: Product[] = [];
@@ -16,25 +16,26 @@ export class ProducsTableComponent implements OnInit {
   constructor(private inventoryService: InventoryService) {}
 
   ngOnInit(): void {
-    this.inventoryService.getProducts().subscribe(products => {
-      this.productos = products;
+    this.inventoryService.getProductos().subscribe(data => {
+      this.productos = data;
     });
   }
-
-  deleteProduct(product: Product): void {
-    this.inventoryService.deleteProduct(product);
+  
+    calculateTotalCost(): number {
+    return this.productos.reduce((total, prod) => total + (prod.purchasePrice * prod.quantity), 0);
   }
 
-  calculateTotalCost(): number {
-  return this.productos.reduce((total, prod) => total + (prod.purchasePrice * prod.quantity), 0);
-}
+  calculateTotalSalesPrice(): number {
+    return this.productos.reduce((total, prod) => total + (prod.publicPrice * prod.quantity), 0);
+  }
 
-calculateTotalSalesPrice(): number {
-  return this.productos.reduce((total, prod) => total + (prod.publicPrice * prod.quantity), 0);
-}
+  calculateTotalProfit(): number {
+    return this.calculateTotalSalesPrice() - this.calculateTotalCost();
+  }
 
-calculateTotalProfit(): number {
-  return this.calculateTotalSalesPrice() - this.calculateTotalCost();
-}
-
+  deleteProduct(id: string): void {
+    this.inventoryService.deleteProducto(id).subscribe(() => {
+      this.productos = this.productos.filter(prod => prod._id !== id);
+    });
+  }
 }

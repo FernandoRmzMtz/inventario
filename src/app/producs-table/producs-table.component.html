@@ -15,7 +15,7 @@
         <td>{{ prod.purchasePrice }}</td>
         <td>{{ prod.publicPrice }}</td>
         <td>
-        <button (click)="deleteProduct(prod)" class="btn btn-danger">Delete</button>
+            <button (click)="deleteProduct(prod._id ?? '')" class="btn btn-danger">Delete</button>
         </td>
     </tr>
     </tbody>

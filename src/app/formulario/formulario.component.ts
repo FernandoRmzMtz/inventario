@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Product } from '../product.model'; 
-import { InventoryService } from '../inventory.service'; 
+import { InventoryService } from '../services/inventory.service'; 
 import { NgIf } from '@angular/common';
+// import { HttpClientModule } from '@angular/common/http';
 @Component({
   standalone:true,
   selector: 'app-formulario',
@@ -13,6 +14,7 @@ import { NgIf } from '@angular/common';
 export class FormularioComponent implements OnInit {
   productForm: FormGroup;
 
+  // constructor(private fb: FormBuilder) {
   constructor(private fb: FormBuilder, private inventoryService: InventoryService) {
     this.productForm = this.fb.group({
       productName: ['',  [Validators.required, Validators.min(0)]],
@@ -27,8 +29,9 @@ export class FormularioComponent implements OnInit {
   onSubmit(): void {
     if (this.productForm.valid) {
       const newProduct: Product = this.productForm.value;
-      this.inventoryService.addProduct(newProduct); 
-      this.productForm.reset();
+      this.inventoryService.addProducto(newProduct).subscribe(() => {
+        this.productForm.reset();
+      });
     }
   }
 }
