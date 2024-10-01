@@ -1,10 +1,10 @@
 # Inventario
 
-## Descripción del Proyecto
+## Descripción del Proyecto 
 
 Este proyecto es una aplicación de gestión de inventario que permite a los usuarios agregar, visualizar, eliminar y calcular los costos y ganancias de productos. Está construido utilizando **Angular** para el frontend y **Express** junto con **MongoDB** para el backend.
 
-## Tecnologías Utilizadas
+## Tecnologías Utilizadas:
 
 - **Frontend:**
   - [Angular](https://angular.io/) - Framework para construir aplicaciones web dinámicas.
