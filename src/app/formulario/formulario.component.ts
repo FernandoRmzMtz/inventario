@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Product } from '../product.model'; 
 import { InventoryService } from '../services/inventory.service'; 
 import { NgIf } from '@angular/common';
-import { Subject } from 'rxjs';
 @Component({
   standalone:true,
   selector: 'app-formulario',
@@ -13,8 +12,8 @@ import { Subject } from 'rxjs';
 })
 export class FormularioComponent implements OnInit {
   productForm: FormGroup;
-  @Output() productAdded = new Subject<void>();
-  // @Output() productAdded: EventEmitter<void> = new EventEmitter<void>();
+  
+  @Output() productAdded = new EventEmitter<void>();
 
   constructor(private fb: FormBuilder, private inventoryService: InventoryService) {
     this.productForm = this.fb.group({
@@ -32,7 +31,8 @@ export class FormularioComponent implements OnInit {
       const newProduct: Product = this.productForm.value;
       this.inventoryService.addProducto(newProduct).subscribe(() => {
         this.productForm.reset();
-        window.location.reload();
+        this.productAdded.emit();
+        // window.location.reload();
       });
     }
   }

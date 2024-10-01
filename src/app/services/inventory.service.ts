@@ -32,7 +32,6 @@ export class InventoryService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: HttpErrorResponse): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);
-      // Return an empty result to keep the app running
       return of(result as T);
     };
   }

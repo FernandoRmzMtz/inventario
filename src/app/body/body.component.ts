@@ -15,6 +15,5 @@ export class BodyComponent {
 
   onProductAdded(): void {
     this.producTable.ngOnInit();
-    console.log("recargado");
   }
 }
