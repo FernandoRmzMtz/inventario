@@ -8,7 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
   standalone: true,
   selector: 'app-producs-table',
   templateUrl: './producs-table.component.html',
-    imports: [NgIf,NgFor]
+  styleUrls: ['./producs-table.component.css'],
+  imports: [NgIf,NgFor]
 })
 export class ProducsTableComponent implements OnInit {
   productos: Product[] = [];
