@@ -1,0 +1,39 @@
+<div class="formulario">
+  <form (ngSubmit)="onSubmit()" [formGroup]="productForm">
+    <div class="mb-3">
+      <label for="productName" class="form-label">Product Name</label>
+      <input type="text" class="form-control" id="productName" formControlName="productName" placeholder="Enter product name" autofocus />
+      <div *ngIf="productForm.get('productName')?.invalid && productForm.get('productName')?.touched" class="text-danger">
+        Product name is required.
+      </div>
+    </div>
+    
+    <div class="mb-3">
+      <label for="quantity" class="form-label">Quantity</label>
+      <input type="number" class="form-control" id="quantity" formControlName="quantity" placeholder="Enter quantity" />
+      <div *ngIf="productForm.get('quantity')?.errors?.['min'] && productForm.get('quantity')?.touched" class="text-danger">
+        Quantity cannot be negative.
+      </div>
+    </div>
+    
+    <div class="mb-3">
+      <label for="purchasePrice" class="form-label">Purchase Price</label>
+      <input type="number" class="form-control" id="purchasePrice" formControlName="purchasePrice" placeholder="Enter purchase price" />
+      <div *ngIf="productForm.get('purchasePrice')?.errors?.['min'] && productForm.get('purchasePrice')?.touched" class="text-danger">
+        Purchase price cannot be negative.
+      </div>
+    </div>
+    
+    <div class="mb-3">
+      <label for="publicPrice" class="form-label">Public Price</label>
+      <input type="number" class="form-control" id="publicPrice" formControlName="publicPrice" placeholder="Enter public price" />
+      <div *ngIf="productForm.get('publicPrice')?.errors?.['min'] && productForm.get('publicPrice')?.touched" class="text-danger">
+        Public price cannot be negative.
+      </div>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Submit</button>
+    </div>
+  </form>
+  
+</div>

@@ -1,0 +1,9 @@
+.header{
+    height: auto;
+    position: fixed;
+    
+}
+
+nav a:hover {
+    color: #f1c40f;
+}
